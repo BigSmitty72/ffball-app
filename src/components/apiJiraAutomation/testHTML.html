@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="./createJiraIssue.js">test script</script>
+    <script>
+      $.jsonp({
+        url: 'http://jsonview.com/example.json', // any JSON endpoint
+        corsSupport: true, // if URL above supports CORS (optional)
+        jsonpSupport: true, // if URL above supports JSONP (optional)
+
+        success: function(data){
+          alert('CORS or JSONP! ' + data.awesome);
+        }
+        // error, etc.
+      });
+    </script>
+  </head>
+  <body>
+    <div id="results"></div>
+  </body>
+</html>
