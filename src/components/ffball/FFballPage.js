@@ -6,7 +6,7 @@ import FFballPowerRankings from './FFballPowerRankings';
 import FFballBestDrafter from './FFballBestDrafter';
 import FFballLastManStanding from './FFballLastManStanding';
 import FFballWinnings from './FFballWinnings';
-import FFballPageSeasonPanel from './FFballPageSeasonPanel';
+// import FFballPageSeasonPanel from './FFballPageSeasonPanel';
 import ffPowerRankingsImg from "../../assets/ffPowerRankings.png";
 import ffBestDrafterImg from "../../assets/ffBestDrafter.jpg";
 import ffPlayoffsImg from "../../assets/ffPlayoffs.jpg";
@@ -16,7 +16,6 @@ import ffLastManStandingImg from "../../assets/ffLastManStanding.png";
 export default class FFballPage extends React.Component {
   constructor() {
     super();
-
     this.state = {
       selectedPage: 'none',
       selectedSeason: 2017,
@@ -25,7 +24,7 @@ export default class FFballPage extends React.Component {
       pwSalt: 'buffHuntin247!',
       onLoadEndpoints: ['UserTeams'],
       ffballApi: {
-        ffballApiUrl: 'http://localhost:8080/api/ffball/v1',
+        ffballApiUrl: 'http://ec2-18-221-191-1.us-east-2.compute.amazonaws.com:8080/api/ffball/v1',
         config: {
           headers: {'X-Requested-With': 'test-header'}
         },
@@ -161,11 +160,11 @@ export default class FFballPage extends React.Component {
 
   render() {
     const { ffballItems } = this.state;
-    let userTeamsRes = [];
+    // let userTeamsRes = [];
 
-    if (this.props.api.apiRes.UserTeams !== undefined) {
-      userTeamsRes = this.props.api.apiRes.UserTeams.res;
-    }
+    // if (this.props.api.apiRes.UserTeams !== undefined) {
+    //   userTeamsRes = this.props.api.apiRes.UserTeams.res;
+    // }
 
     const ffballOptionsPage = ffballItems.map((option, index) => {
       return (
@@ -225,9 +224,9 @@ export default class FFballPage extends React.Component {
       <div>
         <FFballSubNav {...this.state} onChange={this.handleNavClick} />
         <Grid>
-          <Row>
+          {/*<Row>
             <FFballPageSeasonPanel userTeamsRes={userTeamsRes} handleSeasonPanelChange={this.handleSeasonPanelChange} />
-          </Row>
+          </Row>*/}
           <Row>
             {currentPage(this.state.selectedPage)}
           </Row>

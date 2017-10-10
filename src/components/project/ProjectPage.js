@@ -17,10 +17,6 @@ export default class ProjectPage extends React.Component {
     this.getProjects();
   }
 
-  componentDidMount() {
-    //fetchApi('http://localhost:9000/powerRankings/season/2016/leagueId/70928');
-  }
-
   getProjects(){
     this.setState({projects: [
       {
