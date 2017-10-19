@@ -1,12 +1,17 @@
 import React from 'react';
 import { Col, Grid, ListGroup, ListGroupItem, Row, Panel } from 'react-bootstrap';
+import FFballPopoverHeader from '../common/FFballPopoverHeader';
 
 export default class FFballLastManStanding extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      onLoadEndpoints: ['LastManStanding']
+      onLoadEndpoints: ['LastManStanding'],
+      popOverInfo: {
+        title: 'Last Man Standing',
+        description: <div>Lowest scoring team still in the pot each week is eliminated. Last team standing wins</div>
+      }
     }
   }
 
@@ -23,6 +28,7 @@ export default class FFballLastManStanding extends React.Component {
   }
 
   render() {
+    const { popOverInfo } = this.state;
     let eliminatedTeamsList = [];
     let remainingTeamsList = [];
 
@@ -79,11 +85,7 @@ export default class FFballLastManStanding extends React.Component {
     return (
       <div>
         <Grid>
-          <Row>
-            <Col sm={12} md={12} lg={12}>
-              <h1>Last Man Standing</h1>
-            </Col>
-          </Row>
+          <FFballPopoverHeader header={popOverInfo.title} popoverDescription={popOverInfo.description} />
           <Row>
             {lastManPanels()}
           </Row>

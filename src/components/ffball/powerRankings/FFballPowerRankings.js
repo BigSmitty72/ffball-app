@@ -1,7 +1,8 @@
 import React from 'react';
-import ApiResTbl from './ApiResTbl';
+import ApiResTbl from '../common/ApiResTbl';
 import PowerRankingsWeekForm from './PowerRankingsWeekForm';
 import FFballPowerRankingChart from './FFballPowerRankingChart';
+import FFballPopoverHeader from '../common/FFballPopoverHeader';
 import { Col, Grid, Nav, NavItem, Row } from 'react-bootstrap';
 
 export default class FFballPowerRankings extends React.Component {
@@ -24,12 +25,16 @@ export default class FFballPowerRankings extends React.Component {
           title: 'Power Ranking Chart',
           active: false
         }
-      ]
+      ],
+      popOverInfo: {
+        title: 'Power Rankings',
+        description: <div>Weekly Power Rankings and trending chart.  Power Score determined by the formula: <br /> <strong>(teamPF + (teamPF * teamW / totalGames) * .15)</strong></div>
+      }
     }
     this.handleChange = this.handleChange.bind(this);
     this.hangleNavChange = this.hangleNavChange.bind(this);
   }
-
+  
   componentWillMount() {
     const { onLoadEndpoints } = this.state;
     const { ffballApi } = this.props;
@@ -64,7 +69,7 @@ export default class FFballPowerRankings extends React.Component {
   }
 
   render() {
-    const { endpointName, powerRankingOptions, selectedWeek, selectedNavId } = this.state;
+    const { endpointName, popOverInfo, powerRankingOptions, selectedWeek, selectedNavId } = this.state;
     let endpointRes;
     let weeks = ['Current'];
     let powerRankData = [];
@@ -83,7 +88,6 @@ export default class FFballPowerRankings extends React.Component {
     }
 
     if (this.props.api.apiRes.PowerRankingsHistory) {
-      console.log(this.props.api.apiRes.PowerRankingsHistory);
       /* eslint-disable array-callback-return */
       this.props.api.apiRes.PowerRankingsHistory.res.map((week) => {
         week.powerRank.map((weekRank) => {
@@ -133,7 +137,7 @@ export default class FFballPowerRankings extends React.Component {
 
     return (
       <Grid>
-        <h1>Power Rankings</h1>
+        <FFballPopoverHeader header={popOverInfo.title} popoverDescription={popOverInfo.description} />
         <Row>
           {powerRankNavOptions()}
         </Row>

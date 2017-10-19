@@ -17,9 +17,9 @@ export function fetchApi(method, endpoint, payload, config) {
       })
     }
   } else if (method === 'POST') {
+    axios.defaults.headers.common['X-FFBall-ProxyVersion'] = '1';
     return function(dispatch) {
       axios.post(endpoint, payload, config).then((response) => {
-        console.log(response);
         dispatch({
           type: 'FETCH_API_FULFILLED',
           endpoint: endpoint,

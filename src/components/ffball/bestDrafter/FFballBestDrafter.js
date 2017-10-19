@@ -1,6 +1,7 @@
 import React from 'react';
 import FFballBestDrafterPanel from './FFballBestDrafterPanel';
-import { Col, Grid, Row } from 'react-bootstrap';
+import { Grid, Row } from 'react-bootstrap';
+import FFballPopoverHeader from '../common/FFballPopoverHeader';
 
 export default class FFballBestDrafter extends React.Component {
   constructor() {
@@ -10,6 +11,10 @@ export default class FFballBestDrafter extends React.Component {
       onLoadEndpoints: ['BestDrafter'],
       tableData: {
         tableHeaders: []
+      },
+      popOverInfo: {
+        title: 'Top Drafter',
+        description: <div>Best drafter of the year based on that players scores the team drafted (even if that player has been dropped/traded)</div>
       }
     }
   }
@@ -27,6 +32,7 @@ export default class FFballBestDrafter extends React.Component {
   }
 
   render() {
+    const { popOverInfo } = this.state;
     let bestDraftRes = [];
     const tableHeadersList = [];
     if (this.props.api.apiRes.BestDrafter !== undefined) {
@@ -49,11 +55,7 @@ export default class FFballBestDrafter extends React.Component {
     return (
       <div>
         <Grid>
-          <Row>
-            <Col sm={12} md={12} lg={12}>
-              <h1>Top Drafter</h1>
-            </Col>
-          </Row>
+          <FFballPopoverHeader header={popOverInfo.title} popoverDescription={popOverInfo.description} />
           <Row>
             {draftRes}
           </Row>

@@ -1,7 +1,8 @@
 import React from 'react';
 import monteCarloSimulator from './monteCarloSimulator';
-import ApiResTbl from './ApiResTbl';
+import ApiResTbl from '../common/ApiResTbl';
 import { Button, Col, Grid, Row, Form, FormGroup, FormControl, HelpBlock, ControlLabel } from 'react-bootstrap';
+import FFballPopoverHeader from '../common/FFballPopoverHeader';
 
 export default class FFballPlayoffSimulator extends React.Component {
   constructor() {
@@ -17,6 +18,10 @@ export default class FFballPlayoffSimulator extends React.Component {
         warningMessage: '',
         warningMin: 50,
         warningMax: 9999
+      },
+      popOverInfo: {
+        title: 'Playoff Simulator',
+        description: <div>Uses Monte Carlo simulation along with the remaining matchups per team to simulate the records at the end of the season.  Will run through the provided amount of simulations and give the percentage that the teams finished in playoffs along with 1st/2nd.</div>
       }
     }
 
@@ -77,6 +82,7 @@ export default class FFballPlayoffSimulator extends React.Component {
   }
 
   render() {
+    const { popOverInfo } = this.state;
 
     const simulationForm = (simValue) => {
       const { simulations, isLoading, isDisabled, warningMessage, validationState } = simValue;
@@ -116,11 +122,7 @@ export default class FFballPlayoffSimulator extends React.Component {
     return (
       <div>
         <Grid>
-          <Row>
-            <Col sm={12} md={12} lg={12}>
-              <h1>Playoff Simulator</h1>
-            </Col>
-          </Row>
+          <FFballPopoverHeader header={popOverInfo.title} popoverDescription={popOverInfo.description} />
           <Row>
             <Col xs={12} md={12}>
               {simulationForm(this.state.simValue)}
