@@ -16,8 +16,8 @@ export default class RocketLeaguePage extends React.Component {
     this.state = {
       selectedPage: 'none',
       googleSpreadsheetPayload: {},
-      getItemListEndpoint: 'http://ec2-18-221-191-1.us-east-2.compute.amazonaws.com:8080/api/rocketLeague/v1/GetItemList',
-      getGoogleSpreadsheetEndpoint: 'http://ec2-18-221-191-1.us-east-2.compute.amazonaws.com:8080:8080/api/rocketLeague/v1/GoogleSpreadsheetData',
+      getItemListEndpoint: 'http://localhost:8080/api/rocketLeague/v1/GetItemList',
+      getGoogleSpreadsheetEndpoint: 'http://localhost:8080/api/rocketLeague/v1/GoogleSpreadsheetData',
       consoleNames: ['Xbox'],
       rlItemCrates: [
         {
