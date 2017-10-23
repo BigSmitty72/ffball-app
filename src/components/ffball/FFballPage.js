@@ -1,22 +1,22 @@
 import React from 'react';
-import { Col, Grid, Row, Thumbnail } from "react-bootstrap";
+import { Col, Grid, Row, Thumbnail } from 'react-bootstrap';
 import FFballSubNav from './FFballSubNav';
-import FFballPlayoffSimulator from './FFballPlayoffSimulator';
-import FFballPowerRankings from './FFballPowerRankings';
-import FFballBestDrafter from './FFballBestDrafter';
-import FFballLastManStanding from './FFballLastManStanding';
-import FFballWinnings from './FFballWinnings';
-import FFballPageSeasonPanel from './FFballPageSeasonPanel';
-import ffPowerRankingsImg from "../../assets/ffPowerRankings.png";
-import ffBestDrafterImg from "../../assets/ffBestDrafter.jpg";
-import ffPlayoffsImg from "../../assets/ffPlayoffs.jpg";
-import ffWinningsImg from "../../assets/ffWinnings.jpg";
-import ffLastManStandingImg from "../../assets/ffLastManStanding.png";
+import FFballPlayoffSimulator from './playoffSim/FFballPlayoffSimulator';
+import FFballPowerRankings from './powerRankings/FFballPowerRankings';
+import FFballBestDrafter from './bestDrafter/FFballBestDrafter';
+import FFballLastManStanding from './lastManStanding/FFballLastManStanding';
+import FFballWinnings from './teamWinnings/FFballWinnings';
+// import FFballPageSeasonPanel from './FFballPageSeasonPanel';
+import ffPowerRankingsImg from '../../assets/ffPowerRankings.png';
+import ffBestDrafterImg from '../../assets/ffBestDrafter.jpg';
+import ffPlayoffsImg from '../../assets/ffPlayoffs.jpg';
+import ffWinningsImg from '../../assets/ffWinnings.jpg';
+import ffLastManStandingImg from '../../assets/ffLastManStanding.png';
 
+//http://ec2-18-221-191-1.us-east-2.compute.amazonaws.com:8080
 export default class FFballPage extends React.Component {
   constructor() {
     super();
-
     this.state = {
       selectedPage: 'none',
       selectedSeason: 2017,
@@ -27,7 +27,7 @@ export default class FFballPage extends React.Component {
       ffballApi: {
         ffballApiUrl: 'http://localhost:8080/api/ffball/v1',
         config: {
-          headers: {'X-Requested-With': 'test-header'}
+          headers: {'Content-Type': 'application/json'}
         },
         payload: {
           leagueId: 70928,
@@ -40,21 +40,21 @@ export default class FFballPage extends React.Component {
           title: 'Power Rankings',
           active: false,
           imgSrc: ffPowerRankingsImg,
-          description: 'Current/weekly Power Rankings and trending chart'
+          description: 'Weekly power ranking/trending'
         },
         {
           id: 'playoffCalc',
           title: 'Playoff Calculator',
           active: false,
           imgSrc: ffPlayoffsImg,
-          description: 'Project Playoffs based on remaining matchups and number of simulations'
+          description: 'Project playoff positions'
         },
         {
           id: 'bestDraft',
           title: 'Best Drafter',
           active: false,
           imgSrc: ffBestDrafterImg,
-          description: 'Top drafters based on current player pick and value'
+          description: 'Top drafters based on players'
         },
         // {
         //   id: 'freeAgency',
@@ -68,30 +68,30 @@ export default class FFballPage extends React.Component {
           title: 'Winnings',
           active: false,
           imgSrc: ffWinningsImg,
-          description: 'Winnings from HighScore/Last man Standing/Playoff payouts'
+          description: 'Winnings from league payouts'
         },
         {
           id: 'lastManStanding',
           title: 'Last Man Standing',
           active: false,
           imgSrc: ffLastManStandingImg,
-          description: 'Last man standing rankings (lowest remaining score eliminated weekly)'
+          description: 'Last man standing rankings'
         },
         {
           id: 'gmPayments',
           title: 'GM League Payments',
           active: false,
           imgSrc: ffLastManStandingImg,
-          description: 'GM Tools - Keep track of league payments'
+          description: 'GM Tools - league payments, etc'
         }
       ]
       // user: {
       //   isAuthenticated: true,
-      //   userName: "BigSmitty72",
-      //   email: "jasonsmith7272@gmail.com",
+      //   userName: 'BigSmitty72',
+      //   email: 'jasonsmith7272@gmail.com',
       //   userId: 9999,
-      //   firstName: "Jason",
-      //   lastName: "Smith"
+      //   firstName: 'Jason',
+      //   lastName: 'Smith'
       // }
     }
 
@@ -161,16 +161,16 @@ export default class FFballPage extends React.Component {
 
   render() {
     const { ffballItems } = this.state;
-    let userTeamsRes = [];
+    // let userTeamsRes = [];
 
-    if (this.props.api.apiRes.UserTeams !== undefined) {
-      userTeamsRes = this.props.api.apiRes.UserTeams.res;
-    }
+    // if (this.props.api.apiRes.UserTeams !== undefined) {
+    //   userTeamsRes = this.props.api.apiRes.UserTeams.res;
+    // }
 
     const ffballOptionsPage = ffballItems.map((option, index) => {
       return (
         <Col key={index} xs={6} md={4} lg={3}>
-          <Thumbnail href="#" alt={option.id} src={option.imgSrc} onClick={this.handleImgClick.bind(this, option.id)}>
+          <Thumbnail href='#' alt={option.id} src={option.imgSrc} onClick={this.handleImgClick.bind(this, option.id)}>
             <h3>{option.title}</h3>
             <p>{option.description}</p>
           </Thumbnail>
@@ -225,9 +225,9 @@ export default class FFballPage extends React.Component {
       <div>
         <FFballSubNav {...this.state} onChange={this.handleNavClick} />
         <Grid>
-          <Row>
+          {/*<Row>
             <FFballPageSeasonPanel userTeamsRes={userTeamsRes} handleSeasonPanelChange={this.handleSeasonPanelChange} />
-          </Row>
+          </Row>*/}
           <Row>
             {currentPage(this.state.selectedPage)}
           </Row>
