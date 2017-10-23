@@ -52,6 +52,7 @@ export default class FFballWinnings extends React.Component {
 
     if (this.props.api.apiRes.TeamWinnings) {
       selectedTeamWinnings = this.props.api.apiRes.TeamWinnings.res[selectedSeason];
+      /* eslint-disable no-unused-expressions */
       for (const yearProp in this.props.api.apiRes.TeamWinnings.res) {
         yearProp.toLowerCase() !== 'all' ? seasons.push(yearProp) : '';
         seasons.sort(function(a, b){return b-a});
