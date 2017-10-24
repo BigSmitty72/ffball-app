@@ -9,6 +9,7 @@
     "async-es": "2.x",
     "axios": "^0.16.2",
     "chart.js": "^2.7.0",
+    "dotenv": "^4.0.0",
     "rc-slider": "^8.3.1",
     "react": "15.4.1",
     "react-addons-css-transition-group": "15.4.1",

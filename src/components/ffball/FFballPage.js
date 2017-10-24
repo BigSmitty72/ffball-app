@@ -13,7 +13,7 @@ import ffPlayoffsImg from '../../assets/ffPlayoffs.jpg';
 import ffWinningsImg from '../../assets/ffWinnings.jpg';
 import ffLastManStandingImg from '../../assets/ffLastManStanding.png';
 
-//http://ec2-18-221-191-1.us-east-2.compute.amazonaws.com:8080
+const { REACT_APP_FFBALL_API_URL, REACT_APP_PW_SALT } = process.env;
 export default class FFballPage extends React.Component {
   constructor() {
     super();
@@ -22,10 +22,10 @@ export default class FFballPage extends React.Component {
       selectedSeason: 2017,
       selectedLeague: {},
       currentUserId: 1,
-      pwSalt: 'buffHuntin247!',
+      pwSalt: REACT_APP_PW_SALT,
       onLoadEndpoints: ['UserTeams'],
       ffballApi: {
-        ffballApiUrl: 'http://localhost:8080/api/ffball/v1',
+        ffballApiUrl: `${REACT_APP_FFBALL_API_URL}/api/ffball/v1`,
         config: {
           headers: {'Content-Type': 'application/json'}
         },
